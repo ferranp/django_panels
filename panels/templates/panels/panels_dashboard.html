@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n crispy_forms_tags humanize djgeneric_tags %}
+
+{% block container %}
+<div class="row mt-2">
+    <!--div class="col-md-12">
+        <h2>{% trans 'Home' %}</h2>
+    </div>
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active">{% trans "Home" %}</li>
+          </ol>
+        </nav>
+    </div-->
+    {% for panel in panels %}
+    <div class="col-md-6 col-xl-4"" >
+        {% if panel.title %}
+          <h4>{{ panel.title }}</h4>
+        {% endif %}
+        <div style="min-height: 400px">
+            {% include panel.template_name with object_list=panel.get_queryset %}
+        </div>
+        {% if panel.more %}
+        <div class="text-right">
+            <a href="{{ panel.more_url }}">{% trans "View more..." %}</a>
+        </div>
+        {% endif %}
+    </div>
+    {% empty %}
+    <div class="col-md-12">
+        <div class="alert alert-info" role="alert">
+           {% trans "You have no pending items." %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

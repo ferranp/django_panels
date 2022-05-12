@@ -19,7 +19,7 @@
           <h4>{{ panel.title }}</h4>
         {% endif %}
         <div style="min-height: 400px">
-            {% include panel.template_name with object_list=panel.get_queryset %}
+            {% include panel.template_name with object_list=panel.object_list %}
         </div>
         {% if panel.more %}
         <div class="text-right">

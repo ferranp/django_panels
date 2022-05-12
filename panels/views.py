@@ -25,7 +25,7 @@ class BasePanel(object):
 
     params = {}
     exclude_params = {}
-
+    show_count = 10
     title = None
 
     def __init__(self, user, request, **kwargs):
@@ -59,6 +59,9 @@ class BasePanel(object):
         if self.ordering:
             qs = qs.order_by(*self.ordering)
         return qs
+
+    def object_list(self):
+        return self.get_queryset()[:self.show_count]
 
     def is_visible(self):
         return self.get_queryset().exists()

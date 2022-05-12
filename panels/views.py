@@ -10,6 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DetailView, TemplateView, UpdateView
 from django_filters.views import FilterView
 
+from .register import get_user_panels
+
 
 class BasePanel(object):
     template_name = "panels/panel.html"
@@ -26,12 +28,32 @@ class BasePanel(object):
 
     title = None
 
-    def __init__(self, **kwargs):
+    def __init__(self, user, request, **kwargs):
+
+        self.user = user
+        self.request = request
         for k, v in kwargs.items():
             setattr(self, k, v)
 
+    permission_required = None
+
+    def has_permission(self):
+
+        if self.permission_required is None:
+            return True
+
+        if isinstance(self.permission_required, str):
+            perms = (self.permission_required,)
+        else:
+            perms = self.permission_required
+
+        return self.request.user.has_perms(perms)
+
+    def get_params(self):
+        return self.parmas
+
     def get_queryset(self):
-        qs = self.model.objects.filter(**self.params)
+        qs = self.model.objects.filter(**self.get_params())
         if self.exclude_params:
             qs = qs.exclude(**self.exclude_params)
         if self.ordering:
@@ -48,7 +70,7 @@ class BasePanel(object):
     def more_url(self):
         mparams = self.more_params
         if mparams is None:
-            mparams = self.params
+            mparams = self.get_params()
         return "%s?%s" % (self.base_more_url, urllib.parse.urlencode(mparams))
 
 
@@ -57,7 +79,7 @@ class PanelsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        panels = self.get_panels()
+        panels = get_user_panels(self.request.user, self.request)
 
         context["panels"] = [panel for panel in panels if panel.is_visible()]
 

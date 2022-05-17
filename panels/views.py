@@ -47,7 +47,7 @@ class BasePanel(object):
         else:
             perms = self.permission_required
 
-        return self.request.user.has_perms(perms)
+        return self.user.has_perms(perms)
 
     def get_params(self):
         return self.parmas

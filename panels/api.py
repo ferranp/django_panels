@@ -23,7 +23,12 @@ class PanelViewSet(viewsets.ViewSet):
             show_count = 10
 
         panels = get_user_panels(user, request, show_count=show_count)
-        panels = [panel for panel in panels if panel.is_visible()]
+
+        if request.GET.get("all"):
+            # First the ones wioth data, after the rest
+            panels.sort(key=lambda x: not x.has_data())
+        else:
+            panels = [panel for panel in panels if panel.has_data()]
 
         data = []
 

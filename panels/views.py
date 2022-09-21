@@ -50,7 +50,7 @@ class BasePanel(object):
         return self.user.has_perms(perms)
 
     def get_params(self):
-        return self.parmas
+        return self.params
 
     def get_queryset(self):
         qs = self.model.objects.filter(**self.get_params())
@@ -63,7 +63,7 @@ class BasePanel(object):
     def object_list(self):
         return self.get_queryset()[:self.show_count]
 
-    def is_visible(self):
+    def has_data(self):
         return self.get_queryset().exists()
 
     @property
@@ -84,7 +84,12 @@ class PanelsView(TemplateView):
         context = super().get_context_data(**kwargs)
         panels = get_user_panels(self.request.user, self.request)
 
-        context["panels"] = [panel for panel in panels if panel.is_visible()]
+        if self.request.GET.get("all"):
+            # First the ones wioth data, after the rest
+            panels.sort(key=lambda x: not x.has_data())
+            context["panels"] = panels
+        else:
+            context["panels"] = [panel for panel in panels if panel.has_data()]
 
         return context
 

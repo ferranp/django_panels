@@ -13,6 +13,8 @@ def register(func=None, name=None):
 
         if not name:
             regname = "%s.%s" % (func.__module__, func.__name__)
+        else:
+            regname = name
 
         _PANEL_REGISTRY[regname] = func
 

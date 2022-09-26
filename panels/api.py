@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth import get_user_model
 from django.template.loader import render_to_string
 from rest_framework import viewsets
@@ -40,7 +42,14 @@ class PanelViewSet(viewsets.ViewSet):
                 "object_list": object_list,
             }
 
-            html = render_to_string(panel.template_name, context=context, request=request)
+            html = render_to_string(
+                panel.template_name, context=context, request=request
+            )
+            # converty to abslure url
+            absolutize = (
+                lambda m: ' href="' + request.build_absolute_uri(m.group(1)) + '"'
+            )
+            html = re.sub(r' href="([^"]+)"', absolutize, html)
 
             url = panel.more_url()
 

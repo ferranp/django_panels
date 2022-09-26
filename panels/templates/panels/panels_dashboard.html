@@ -20,7 +20,7 @@
         {% if panel.title %}
           <h4>{{ panel.title }}</h4>
         {% endif %}
-        <div xstyle="min-height: 400px">
+        <div style="min-height: 400px">
             {% include panel.template_name with object_list=panel.object_list %}
         </div>
         {% if panel.more %}

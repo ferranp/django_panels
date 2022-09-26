@@ -85,7 +85,7 @@ class PanelsView(TemplateView):
         panels = get_user_panels(self.request.user, self.request)
 
         if self.request.GET.get("all"):
-            # First the ones wioth data, after the rest
+            # First the ones width data, after the rest
             panels.sort(key=lambda x: not x.has_data())
             context["panels"] = panels
         else:

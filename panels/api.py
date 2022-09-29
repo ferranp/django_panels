@@ -15,7 +15,10 @@ class PanelViewSet(viewsets.ViewSet):
         username = request.GET.get("user")
         if username:
             User = get_user_model()
-            user = User.objects.get(username=username)
+            try:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                return []
         else:
             user = request.user
 

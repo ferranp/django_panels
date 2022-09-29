@@ -18,7 +18,7 @@ class PanelViewSet(viewsets.ViewSet):
             try:
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
-                return []
+                user = None
         else:
             user = request.user
 
@@ -27,7 +27,10 @@ class PanelViewSet(viewsets.ViewSet):
         except ValueError:
             show_count = 10
 
-        panels = get_user_panels(user, request, show_count=show_count)
+        if user:
+            panels = get_user_panels(user, request, show_count=show_count)
+        else:
+            panels = []
 
         if request.GET.get("all"):
             # First the ones wioth data, after the rest

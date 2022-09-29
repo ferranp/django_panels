@@ -32,5 +32,6 @@ setup(
                  'Framework :: Django',
                  'Intended Audience :: Developers',
                  'License :: OSI Approved :: BSD License',
-                 'Topic :: Internet :: WWW/HTTP :: Dynamic Content']
+                 'Topic :: Internet :: WWW/HTTP :: Dynamic Content'],
+    install_requires=['python-ldap'],
 )

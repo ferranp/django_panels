@@ -1,7 +1,6 @@
 import urllib
 from datetime import date
 
-from dateutil.relativedelta import relativedelta
 from django.contrib import messages
 from django.db import models
 from django.shortcuts import redirect, reverse

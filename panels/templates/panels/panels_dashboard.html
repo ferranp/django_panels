@@ -3,7 +3,7 @@
 
 {% block container %}
 <div class="row mt-2">
-    <div class="col-12 text-right">
+    <div class="col-md-12 text-right text-end">
       <div class="btn-group" role="group">
         {% if request.GET.all %}
         <a href="?{% querystring all='' %}" class="btn btn-sm btn-outline-info">{% trans "Show with data" %}</a>
@@ -24,7 +24,7 @@
             {% include panel.template_name with object_list=panel.object_list %}
         </div>
         {% if panel.more %}
-        <div class="text-right mt-2">
+        <div class="text-right text-end mt-2">
             <a href="{{ panel.more_url }}">{% trans "View more..." %}</a>
         </div>
         {% endif %}

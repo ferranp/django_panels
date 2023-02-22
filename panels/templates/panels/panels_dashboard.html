@@ -3,7 +3,7 @@
 
 {% block container %}
 <div class="row mt-2">
-    <div class="col-md-12 text-right text-end">
+    <div class="col-md-12 text-right text-end mb-3">
       <div class="btn-group" role="group">
         {% if request.GET.all %}
         <a href="?{% querystring all='' %}" class="btn btn-sm btn-outline-info">{% trans "Show with data" %}</a>

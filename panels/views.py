@@ -67,12 +67,16 @@ class BasePanel(object):
 
     @property
     def more(self):
-        return bool(self.more_url)
+        return bool(self.more_url())
 
     def more_url(self):
+        if not self.base_more_url:
+            return None
+
         mparams = self.more_params
         if mparams is None:
             mparams = self.get_params()
+
         return "%s?%s" % (self.base_more_url, urllib.parse.urlencode(mparams))
 
 

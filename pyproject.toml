@@ -1,0 +1,43 @@
+[project]
+name = "django_panels"
+version = "0.1"
+description = "Panells de tasques a fer"
+license = {text = "BSD"}
+authors = [
+{name = "Ferran Pegueroles", email = "ferran@pegueroles.com"},]
+keywords = [
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+dependencies = [
+    "python-ldap",
+]
+
+
+[project.urls]
+Documentation = "https://bitbucket.org/ferranp/django_panels/"
+Source = "https://bitbucket.org/ferranp/django_panels/"
+
+
+[project.optional-dependencies]
+
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = [
+        "panels",
+        "panels.migrations",
+        ]
+
+
+[tool.setuptools.package-data]
+"panels" = ["templates/*/*", "locale/*/*/*", "static/*/*"]

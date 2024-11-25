@@ -1,13 +1,6 @@
 import urllib
-from datetime import date
 
-from django.contrib import messages
-from django.db import models
-from django.shortcuts import redirect, reverse
-from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView, DetailView, TemplateView, UpdateView
-from django_filters.views import FilterView
+from django.views.generic import TemplateView
 
 from .register import get_user_panels
 

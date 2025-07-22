@@ -57,31 +57,33 @@ class PanelViewSet(viewsets.ViewSet):
             )
             html = re.sub(r' href="([^"]+)"', absolutize, html)
 
-            url = panel.more_url()
+            more_url = panel.more_url()
 
-            if url:
-                url = request.build_absolute_uri(url)
+            if more_url:
+                more_url = request.build_absolute_uri(more_url)
 
             items = []
             for obj in object_list:
-                if hasattr(obj, "get_absolute_url"):
-                    url = request.build_absolute_uri(obj.get_absolute_url())
-                elif hasattr(obj, "absolute_url"):
-                    url = request.build_absolute_uri(obj.absolute_url)
-                else:
-                    url = None
+                url = panel.get_object_url(obj)
+                if url:
+                    url = request.build_absolute_uri(url)
+                name = panel.get_object_name(obj)
+                obj_id = panel.get_object_id(obj)
 
                 item = {
-                    "name": str(obj),
-                    "id": obj.pk,
+                    "name": name,
+                    "id": obj_id,
                     "absolute_url": url,
                 }
                 items.append(item)
 
+            panel_name = "{}.{}".format(panel.__class__.__module__, panel.__class__.__name__)
+
             serialized = {
-                "html": html,
+                "name": panel_name,
                 "title": panel.title,
-                "more_url": url,
+                "html": html,
+                "more_url": more_url,
                 "count": len(panel.get_queryset()),
                 "items": items,
             }

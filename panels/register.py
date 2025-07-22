@@ -1,4 +1,3 @@
-from django.apps import apps
 from django.utils.module_loading import autodiscover_modules
 
 _PANEL_REGISTRY = {}

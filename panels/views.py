@@ -72,6 +72,18 @@ class BasePanel(object):
 
         return "%s?%s" % (self.base_more_url, urllib.parse.urlencode(mparams))
 
+    def get_object_url(self, obj):
+        if hasattr(obj, "get_absolute_url"):
+            return obj.get_absolute_url()
+        elif hasattr(obj, "absolute_url"):
+            return obj.absolute_url
+
+    def get_object_name(self, obj):
+        return str(obj)
+
+    def get_object_id(self, obj):
+        return str(obj.pk)
+
 
 class PanelsView(TemplateView):
     template_name = "panels/panels_dashboard.html"

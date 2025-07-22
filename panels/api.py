@@ -62,11 +62,28 @@ class PanelViewSet(viewsets.ViewSet):
             if url:
                 url = request.build_absolute_uri(url)
 
+            items = []
+            for obj in object_list:
+                if hasattr(obj, "get_absolute_url"):
+                    url = request.build_absolute_uri(obj.get_absolute_url())
+                elif hasattr(obj, "absolute_url"):
+                    url = request.build_absolute_uri(obj.absolute_url)
+                else:
+                    url = None
+
+                item = {
+                    "name": str(obj),
+                    "id": obj.pk,
+                    "absolute_url": url,
+                }
+                items.append(item)
+
             serialized = {
                 "html": html,
                 "title": panel.title,
                 "more_url": url,
                 "count": len(panel.get_queryset()),
+                "items": items,
             }
             data.append(serialized)
         return Response(data)

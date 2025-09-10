@@ -84,7 +84,7 @@ class PanelViewSet(viewsets.ViewSet):
                 "title": panel.title,
                 "html": html,
                 "more_url": more_url,
-                "count": len(panel.get_queryset()),
+                "count": panel.count(),
                 "items": items,
             }
             data.append(serialized)

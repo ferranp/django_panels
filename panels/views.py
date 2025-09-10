@@ -84,6 +84,9 @@ class BasePanel(object):
     def get_object_id(self, obj):
         return str(obj.pk)
 
+    def count(self):
+        return self.get_queryset().count()
+
 
 class PanelsView(TemplateView):
     template_name = "panels/panels_dashboard.html"

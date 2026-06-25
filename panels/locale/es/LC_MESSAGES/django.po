@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-21 18:48+0200\n"
-"PO-Revision-Date: 2022-09-21 18:50+0200\n"
+"PO-Revision-Date: 2026-06-25 14:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.6\n"
 
 #: templates/panels/panel.html:17
 msgid "No pending items."
@@ -25,12 +25,12 @@ msgstr "No tienes elementos pendientes."
 #: templates/panels/panels_dashboard.html:9
 #: templates/panels/panels_dashboard.html:12
 msgid "Show with data"
-msgstr "Muestra con datos"
+msgstr "Mostrar con datos"
 
 #: templates/panels/panels_dashboard.html:10
 #: templates/panels/panels_dashboard.html:13
 msgid "Show all"
-msgstr "Muestra todos"
+msgstr "Mostrar todos"
 
 #: templates/panels/panels_dashboard.html:28
 msgid "View more..."

@@ -5,7 +5,6 @@
 <div class="row mt-2">
     <div class="col-md-12 text-right mb-3">
       <div class="float-end btn-group" role="group">
-        {% trans "Workboard" %} 
         {% if request.GET.all %}
         <a href="?{% querystring all='' %}" class="btn btn-sm btn-outline-info">{% trans "Show with data" %}</a>
         <a href="?{% querystring all=1 %}" class="btn btn-sm btn-info">{% trans "Show all" %}</a>
@@ -14,6 +13,7 @@
         <a href="?{% querystring all=1 %}" class="btn btn-sm btn-outline-info">{% trans "Show all" %}</a>
         {% endif %}
       </div>
+      <h2>{% trans "Workboard" %}</h2> 
     </div>
 
     {% for panel in panels %}

@@ -13,8 +13,8 @@ clean:
 
 .PHONY: deploy
 deploy:
-	hg bookmark -r default master ; hg push
+	git push origin main
 
 .PHONY: deploy_test
 deploy_test:
-	hg bookmark -r default master ; hg push
+	git push origin main
